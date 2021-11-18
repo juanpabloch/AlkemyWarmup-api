@@ -3,7 +3,7 @@ const Categories = require('../models/category')
 const findAll = async(req, res, next)=>{
     try {
         const data = await Categories.findAll()
-        res.json(data)
+        res.status(200).json(data)
         
     } catch (error) {
         next(error)
@@ -13,7 +13,7 @@ const findAll = async(req, res, next)=>{
 const create = async(req, res, next)=>{
     try {
         const category = await Categories.create(req.body)
-        res.json(category)
+        res.status(201).json(category)
     } catch (error) {
         next(error)
     }
@@ -30,9 +30,9 @@ const deleteCategory = async(req, res, next)=>{
         })
         
         if(deleteC){
-            res.json({mgs: "category successfully delete"})
+            res.status(200).json({mgs: "category successfully delete"})
         }else{
-            res.json({error: "category no exist"})
+            res.status(400).json({error: "category no exist"})
         }
 
     } catch (error) {

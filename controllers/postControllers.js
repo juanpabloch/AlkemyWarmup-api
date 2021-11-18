@@ -8,7 +8,7 @@ const findAll =  async(req, res, next)=>{
             attributes: {exclude: ['content', 'categoryId']},
             order: [['created', 'DESC'] ]
         })
-        res.json(data)
+        res.status(200).json(data)
         
     } catch (error) {
         next(error)
@@ -25,7 +25,7 @@ const findById = async(req, res, next)=>{
             attributes: {exclude: ['categoryId']}
         })
         if(!post)throw new Error('Post not found')
-        res.json(post)
+        res.status(200).json(post)
     } catch (error) {
         next(error)
     }
@@ -34,8 +34,7 @@ const findById = async(req, res, next)=>{
 const create = async(req, res, next)=>{
     try {
         const post = await Posts.create(req.body)
-        console.log(post)
-        res.json(post)
+        res.status(201).json(post)
     } catch (error) {
         next(error)
     }
@@ -65,7 +64,7 @@ const update = async(req, res, next)=>{
             attributes: {exclude: ['categoryId']}
         })
 
-        res.json(newPost)
+        res.status(200).json(newPost)
     } catch (error) {
         next(error)
     }
@@ -79,9 +78,9 @@ const deletePost = async(req, res, next)=>{
             where: {id}
         })
         if(postDelete){
-            res.json({mgs: "Post successfully deleted"})
+            res.status(200).json({mgs: "Post successfully deleted"})
         }else{
-            res.json({error: "Post not exist"})
+            res.status(400).json({error: "Post not exist"})
         }
     } catch (error) {
         next(error)

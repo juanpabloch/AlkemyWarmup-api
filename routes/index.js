@@ -5,7 +5,7 @@ const postRoutes = require('./postsRoutes')
 const categoryRoutes = require('./categoriesRoutes')
 
 router.get('/', (req, res)=>{
-    res.json({msj: "welcome"})
+    res.status(200).json({msj: "welcome"})
 })
 
 router.use('/posts', postRoutes)
