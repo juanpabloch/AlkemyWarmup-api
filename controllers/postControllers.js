@@ -61,7 +61,8 @@ const update = async(req, res, next)=>{
 
         const newPost = await Posts.findOne({
             where: {id},
-            include: [{model: Categories}]
+            include: [{model: Categories}],
+            attributes: {exclude: ['categoryId']}
         })
 
         res.json(newPost)
