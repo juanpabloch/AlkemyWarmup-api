@@ -11,10 +11,11 @@ require('./models/associations')
 app.use(express.json())
 app.use(express.urlencoded())
 
+
 app.use('/', routes)
 
 app.use((req, res)=>{
-    res.status(404).json({mgs: "not found"})
+    res.status(404).json({mgs: "page not found"})
 })
 
 app.use((err, req, res, next)=>{
@@ -23,6 +24,7 @@ app.use((err, req, res, next)=>{
     }
     res.status(500).json({error: err.message})
 })
+
 
 app.listen(port, async()=>{
     try {
