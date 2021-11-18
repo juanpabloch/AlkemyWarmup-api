@@ -18,9 +18,10 @@ app.use((req, res)=>{
 })
 
 app.use((err, req, res, next)=>{
-    console.log(err)
-    // res.status(500).json({error: err.message})
-    res.status(500).json({error: err})
+    if(err.errors){
+        res.status(500).json({error: err.errors[0].message})
+    }
+    res.status(500).json({error: err.message})
 })
 
 app.listen(port, async()=>{
